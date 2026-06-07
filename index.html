@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Car Log App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <h1>บันทึกทะเบียนรถ</h1>
+    <div id="content">กำลังโหลดข้อมูล...</div>
+    <script>
+        fetch('data.csv')
+            .then(response => response.text())
+            .then(data => {
+                const rows = data.split('\n');
+                let html = '<table border="1">';
+                rows.forEach(row => {
+                    html += '<tr><td>' + row.split(',').join('</td><td>') + '</td></tr>';
+                });
+                html += '</table>';
+                document.getElementById('content').innerHTML = html;
+            });
+    </script>
+</body>
+</html>
